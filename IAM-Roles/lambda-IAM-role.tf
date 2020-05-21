@@ -16,3 +16,7 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 EOF
 }
+
+output "iam-lambda-arn" {
+  value = aws_iam_role.iam_for_lambda.arn
+}
