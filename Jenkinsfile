@@ -60,7 +60,7 @@ spec:
             }
         }
     }
-    stage('terraform commands') {
+    stage('terraform apply') {
         steps {
             container('terraform') {
                 // Will need to do terraform init in order for the terraform backend works
@@ -68,6 +68,17 @@ spec:
                 sh """
                     terraform init
                     terraform plan
+                    terraform apply -auto-approve
+                """
+            }
+        }
+    }
+    stage('terraform apply backend') {
+        steps {
+            container('terraform') {
+                sh """
+                    cd remote-backend
+                    terraform init
                     terraform apply -auto-approve
                 """
             }
